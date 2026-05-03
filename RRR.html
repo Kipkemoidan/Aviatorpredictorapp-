@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fake Aviator</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: white;
+      text-align: center;
+    }
+
+    .header {
+      background: #e53935;
+      color: white;
+      padding: 16px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .text {
+      margin: 18px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    /* ✈️ Plane */
+    .plane {
+      width: 70px;
+      margin: 10px auto 5px;
+    }
+
+    /* 🔴 Circle */
+    .circle {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 6px solid #ddd;
+      margin: 25px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 6px solid #e53935;
+      border-top: 6px solid transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .multiplier {
+      font-size: 42px;
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    /* 🟢 GREEN BUTTON */
+    .btn {
+      margin-top: 10px;
+      padding: 12px 28px;
+      border: none;
+      background: #22c55e;
+      color: white;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">AVIATOR PREDICTOR APP</div>
+
+<div class="text">
+  click the start button to start the game
+</div>
+
+<!-- ✈️ Red Plane SVG -->
+<div class="plane">
+  <svg viewBox="0 0 64 64" fill="#e53935">
+    <path d="M2 34l60-12-20 18 8 18-14-10-16 6 6-14-24-6z"/>
+  </svg>
+</div>
+
+<div class="circle">
+  <div class="ring" id="ring"></div>
+  <div class="multiplier" id="multi">1.00×</div>
+</div>
+
+<button class="btn" onclick="startGame()">NEXT GAME</button>
+
+<script>
+let running = false;
+
+function startGame() {
+  if (running) return;
+  running = true;
+
+  let multiEl = document.getElementById("multi");
+  let ring = document.getElementById("ring");
+
+  // Reset UI
+  multiEl.innerText = "1.00×";
+  multiEl.style.color = "#e53935";
+  ring.style.animation = "spin 1s linear infinite";
+
+  // Random multiplier
+  let value = (Math.random() * (6 - 1.5) + 1.5).toFixed(2);
+
+  setTimeout(() => {
+    multiEl.innerText = value + "×";
+    ring.style.animation = "none";
+    running = false;
+  }, 800);
+}
+</script>
+
+</body>
+</html>
